@@ -1,0 +1,26 @@
+<div class="p-6 bg-white rounded-lg shadow-md max-w-sm mx-auto">
+  <h2 class="text-xl font-semibold mb-4 text-center">
+    Book Hall on {{ date | date: 'fullDate' }}
+  </h2>
+  <div class="space-y-4">
+    <input
+      type="text"
+      [(ngModel)]="user.name"
+      placeholder="Name"
+      class="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <input
+      type="tel"
+      [(ngModel)]="user.phone"
+      placeholder="Phone"
+      class="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <button
+      (click)="handleBooking()"
+      class="bg-blue-500 text-white p-3 rounded-md w-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      [disabled]="!user.name || !user.phone"
+    >
+      Confirm Booking
+    </button>
+  </div>
+</div>

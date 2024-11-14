@@ -1,13 +1,44 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from './services/auth.service';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    CommonModule,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    RouterOutlet,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'angular-hallbooking';
+  showLogin = true;
+
+  constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  handleLoginSuccess(): void {
+    this.authService.login();
+  }
+
+  handleRegisterSuccess(): void {
+    this.authService.login();
+  }
+
+  toggleAuthForm(): void {
+    this.showLogin = !this.showLogin;
+  }
 }

@@ -1,0 +1,26 @@
+<div class="p-4 border rounded-lg shadow">
+  <h2 class="text-lg font-semibold mb-4">Pick a Date</h2>
+  <div class="grid grid-cols-5 gap-2">
+    <button
+      *ngFor="let date of dates"
+      (click)="handleDateClick(date)"
+      [class.bg-red-300]="isBooked(date)"
+      class="p-2 border rounded hover:bg-gray-200"
+    >
+      {{ date.toDateString() }}
+    </button>
+  </div>
+
+  <div *ngIf="selectedBooking" class="mt-4 p-4 border rounded bg-gray-100">
+    <h3 class="text-lg font-semibold">Booking Details</h3>
+    <p><strong>Date:</strong> {{ selectedBooking.date }}</p>
+    <p><strong>Name:</strong> {{ selectedBooking.user.name }}</p>
+    <p><strong>Phone:</strong> {{ selectedBooking.user.phone }}</p>
+    <button
+      (click)="selectedBooking = null"
+      class="mt-2 bg-blue-500 text-white p-2 rounded"
+    >
+      Close
+    </button>
+  </div>
+</div>
